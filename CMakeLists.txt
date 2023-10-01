@@ -17,13 +17,14 @@ find_package(std_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(OpenCV 4.2.0 REQUIRED)
 
+# Add source for node executable (link non-ros dependencies here)
 add_executable(TODO_PACKAGE_NAME src/TODO_NODE_NAME.cpp src/TODO_NODE_NAME_node.cpp)
 target_include_directories(TODO_PACKAGE_NAME PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>)
 target_compile_features(TODO_PACKAGE_NAME PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 
-# Make deps a variable so they get linked to tests as well
+# Make ros deps a variable so they get linked to tests as well
 set(dependencies
         rclcpp
         # Messages TODO_EXTRA
@@ -35,6 +36,7 @@ set(dependencies
         OpenCV
         )
 
+# Link ros dependencies
 ament_target_dependencies(
         TODO_PACKAGE_NAME
         ${dependencies}
@@ -42,6 +44,12 @@ ament_target_dependencies(
 
 install(TARGETS TODO_PACKAGE_NAME
         DESTINATION lib/${PROJECT_NAME})
+
+# Uncomment below to make launch files available if created
+#install(
+#        DIRECTORY launch config
+#        DESTINATION share/${PROJECT_NAME}/
+#)
 
 if (BUILD_TESTING)
     # Manually invoke clang format so it actually uses our file
@@ -53,6 +61,7 @@ if (BUILD_TESTING)
     # Add unit tests
     ament_add_gtest(${PROJECT_NAME}-test
             tests/unit.cpp
+            # Remember to add node source files
             src/TODO_NODE_NAME_node.cpp
             )
     ament_target_dependencies(${PROJECT_NAME}-test ${dependencies})
