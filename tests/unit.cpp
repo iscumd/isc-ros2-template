@@ -4,9 +4,7 @@
 
 #include "TODO_PACKAGE_NAME/TODO_NODE_NAME_node.hpp"
 
-TEST(TODO_NODE_NAME, Test1) {
-}
-
+TEST(TODO_NODE_NAME, Test1) {}
 
 int main(int argc, char** argv) {
     rclcpp::init(0, nullptr);
