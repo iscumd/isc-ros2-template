@@ -23,3 +23,25 @@ These are marked with TODO_EXTRA.
 - C++ formatting via clangformat
 - A selection of sane lints
 - A single node setup in a multithreaded executor
+
+# File structure
+
+```
+.
+├── include
+│   └── TODO_PACKAGE_NAME
+│       └── TODO_NODE_NAME_node.hpp
+├── package.xml
+├── README.md
+├── src
+│   ├── TODO_NODE_NAME.cpp
+│   └── TODO_NODE_NAME_node.cpp
+└── tests
+    └── unit.cpp
+```
+
+TODO_NODE_NAME_node: Source files for the ROS2 node object itself, and only itself
+
+TODO_NODE_NAME.cpp: Source for the main function of the node, and only the main function
+
+tests/unit.cpp: Example file for unit tests. This is linked to the node and ros, so both can be used
